@@ -1,4 +1,6 @@
-node_modules
-tmp
-build
-dist
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
