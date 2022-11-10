@@ -25,7 +25,7 @@ export default class Base extends BaseEntity {
     this.version = 0; 
   }
 
-  invalidate = (): void => {
+  invalidar = (): void => {
     this.deletedAt = new Date();
   }
 }
