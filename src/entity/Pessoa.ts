@@ -32,4 +32,11 @@ export class Pessoa extends Base {
         if(!this.telefones) this.telefones = new Array<Telefone>();
         this.telefones.push(telefone);
     }
+
+    alterarUsuario = (nome: string, email: string, codNac: string, endereco: Endereco): void => {
+        this.nome = nome;
+        this.email = email;
+        this.codNac = codNac;
+        this.endereco = endereco;
+    }
 }
