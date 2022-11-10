@@ -1,4 +1,4 @@
-import { Entity,  Column, OneToOne, OneToMany, ManyToOne } from "typeorm"
+import { Entity,  Column, OneToMany, ManyToOne } from "typeorm"
 import Base from "./Base"
 import { Cidade } from "./Cidade";
 import { Pessoa } from "./Pessoa";
@@ -20,7 +20,7 @@ export class Endereco extends Base {
     @Column()
     cep: string;
 
-    @OneToOne(() => Pessoa, pessoa => pessoa.endereco )
+    @OneToMany(() => Pessoa, pessoa => pessoa.enderecos)
     pessoa: Pessoa;
 
     @ManyToOne(() => Cidade, cidade => cidade.enderecos)

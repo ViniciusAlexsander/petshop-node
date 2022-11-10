@@ -3,9 +3,9 @@ import { Endereco } from "../entity/Endereco";
 import { Pessoa } from "../entity/Pessoa";
 
 const PessoaService = AppDataSource.getRepository(Pessoa).extend({
-  criarPessoa: async function (nome: string, email: string, codNac: string, endereco: Endereco) {
+  criarPessoa: async function (nome: string, email: string, codNac: string) {
     try {
-      const pessoa = new Pessoa(nome, email, codNac, endereco);
+      const pessoa = new Pessoa(nome, email, codNac);
       return await this.save(pessoa);
     } catch (error) {
       throw error;
@@ -21,10 +21,10 @@ const PessoaService = AppDataSource.getRepository(Pessoa).extend({
     }
   },
 
-  alterarPessoa: async function (id: number, nome: string, email: string, codNac: string, endereco: Endereco) {
+  alterarPessoa: async function (id: number, nome: string, email: string, codNac: string) {
     try {
       const pessoa = await this.buscarPessoaPorID(id);
-      pessoa.alterarPessoa(nome, email, codNac, endereco);
+      pessoa.alterarPessoa(nome, email, codNac);
       return await this.save(pessoa);
     } catch (error) {
       throw error;

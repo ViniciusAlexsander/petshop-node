@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne, ManyToOne } from "typeorm"
+import { Entity, Column, OneToOne, ManyToOne, OneToMany } from "typeorm"
 import Base from "./Base"
 import { Endereco } from "./Endereco"
 import { Telefone } from "./Telefone"
@@ -14,18 +14,22 @@ export class Pessoa extends Base {
     @Column()
     codNac: string;
 
-    @OneToOne(() => Endereco, endereco => endereco.pessoa)
-    endereco: Endereco;
+    @OneToMany(() => Endereco, endereco => endereco.pessoa)
+    enderecos: Endereco[];
 
     @ManyToOne(() => Telefone, telefone => telefone.pessoa)
     telefones: Telefone[]
 
-    constructor(nome: string, email: string, codNac: string, endereco: Endereco) {
+    constructor(nome: string, email: string, codNac: string) {
         super();
         this.nome = nome;
         this.email = email;
         this.codNac = codNac;
-        this.endereco = endereco;
+    }
+
+    adicionarEndereco = (endereco: Endereco): void => {
+        if(!this.enderecos) this.enderecos = new Array<Endereco>();
+        this.enderecos.push(endereco);
     }
 
     adicionarTelefone = (telefone: Telefone): void => {
@@ -33,10 +37,9 @@ export class Pessoa extends Base {
         this.telefones.push(telefone);
     }
 
-    alterarUsuario = (nome: string, email: string, codNac: string, endereco: Endereco): void => {
+    alterarUsuario = (nome: string, email: string, codNac: string): void => {
         this.nome = nome;
         this.email = email;
         this.codNac = codNac;
-        this.endereco = endereco;
     }
 }
