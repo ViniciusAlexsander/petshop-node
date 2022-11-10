@@ -25,7 +25,6 @@ export class Endereco extends Base {
 
     @ManyToOne(() => Cidade, cidade => cidade.enderecos)
     cidade: Cidade;
-
     
     constructor(logradouro: string, numero: number, complemento: string, bairro: string, cep: string, cidade: Cidade, pessoa: Pessoa) {
         super();
