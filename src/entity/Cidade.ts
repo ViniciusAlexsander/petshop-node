@@ -24,6 +24,4 @@ export class Cidade extends Base {
     this.enderecos.push(endereco);
   }
     
-
-
 }

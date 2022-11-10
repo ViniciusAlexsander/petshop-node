@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne } from "typeorm"
+import { Entity, Column, OneToOne, ManyToOne } from "typeorm"
 import Base from "./Base"
 import { Endereco } from "./Endereco"
 import { Telefone } from "./Telefone"
@@ -6,13 +6,13 @@ import { Telefone } from "./Telefone"
 @Entity("pessoas")
 export class Pessoa extends Base {
     @Column()
-    nome: string
+    nome: string;
 
     @Column()
-    email: string
+    email: string;
 
     @Column()
-    codNac: string
+    codNac: string;
 
     @OneToOne(() => Endereco, endereco => endereco.pessoa)
     endereco: Endereco;

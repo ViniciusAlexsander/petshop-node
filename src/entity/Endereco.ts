@@ -27,9 +27,15 @@ export class Endereco extends Base {
     cidade: Cidade;
 
     
-    constructor() {
+    constructor(logradouro: string, numero: number, complemento: string, bairro: string, cep: string, cidade: Cidade, pessoa: Pessoa) {
         super();
-        
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.pessoa = pessoa;
     }
 
 }

@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne, ManyToOne, OneToMany } from "typeorm"
+import { Entity, Column, OneToMany } from "typeorm"
 import Base from "./Base"
 import { Cidade } from "./Cidade";
 
