@@ -18,4 +18,5 @@ export const AppDataSource = new DataSource({
   entities: [Cidade, Endereco, Estado, Pessoa, Telefone],
   migrations: [],
   subscribers: [],
+  ssl: true,
 });

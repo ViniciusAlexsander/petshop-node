@@ -1,8 +1,7 @@
 import { AppDataSource } from "../data-source";
-import { Endereco } from "../entity/Endereco";
 import { Pessoa } from "../entity/Pessoa";
 
-const PessoaService = AppDataSource.getRepository(Pessoa).extend({
+export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
   criarPessoa: async function (nome: string, email: string, codNac: string) {
     try {
       const pessoa = new Pessoa(nome, email, codNac);
