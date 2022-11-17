@@ -1,6 +1,5 @@
 import { BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, VersionColumn, UpdateDateColumn,  } from "typeorm";
 
-
 export default class Base extends BaseEntity {
   @PrimaryGeneratedColumn("increment")
   id: number;
