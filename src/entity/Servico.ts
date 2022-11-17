@@ -2,7 +2,7 @@ import { Entity, Column, ManyToOne, OneToMany } from "typeorm"
 import Base from "./Base"
 
 
-@Entity("enderecos")
+@Entity("servico")
 export class Servico extends Base {
     @Column()
     dataEntrada: Date;
