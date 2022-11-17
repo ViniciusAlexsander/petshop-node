@@ -1,7 +1,5 @@
-import { Entity, Column, OneToMany, ManyToOne } from "typeorm";
+import { Entity, Column, OneToMany } from "typeorm";
 import Base from "./Base";
-import { Cidade } from "./Cidade";
-import { Pessoa } from "./Pessoa";
 import { Pet } from "./Pet";
 
 @Entity("especie")
