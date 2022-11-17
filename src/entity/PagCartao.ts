@@ -1,12 +1,12 @@
 import { Entity, Column } from "typeorm"
-import { Pagamento, SituacaoPagamento } from "./Pagamento";
+import { Pagamento } from "./Pagamento";
 
 @Entity("pagCartao")
-export class PagDinheiro extends Pagamento {
+export class PagCartao extends Pagamento {
   @Column()
   parcelas: number;
 
-  constructor(parcelas: number, situacao: SituacaoPagamento) {
+  constructor(parcelas: number, situacao: string) {
     super(situacao);
 
     this.parcelas = parcelas;

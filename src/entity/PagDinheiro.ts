@@ -1,5 +1,5 @@
 import { Entity, Column } from "typeorm"
-import { Pagamento, SituacaoPagamento } from "./Pagamento";
+import { Pagamento } from "./Pagamento";
 
 @Entity("pagDinheiro")
 export class PagDinheiro extends Pagamento {
@@ -9,7 +9,7 @@ export class PagDinheiro extends Pagamento {
   @Column()
   dataPagamento: Date;
 
-  constructor(dataVencimento: Date, dataPagamento: Date, situacao: SituacaoPagamento) {
+  constructor(dataVencimento: Date, dataPagamento: Date, situacao: string) {
     super(situacao);
 
     this.dataVencimento = dataVencimento;

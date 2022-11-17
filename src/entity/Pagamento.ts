@@ -4,15 +4,14 @@ import Base from "./Base"
 @Entity("pagamento")
 export class Pagamento extends Base {
   @Column()
-  situacao: SituacaoPagamento;
+  situacao: string;
 
-  constructor(situacao: SituacaoPagamento) {
+  constructor(situacao: string) {
     super();
-
     this.situacao = situacao;
   }
 }
 
-export interface SituacaoPagamento {
-  // TODO: Perguntar professor o que colocar aqui
-}
+// export interface SituacaoPagamento {
+//   // TODO: Perguntar professor o que colocar aqui
+// }
