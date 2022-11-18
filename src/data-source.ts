@@ -1,10 +1,11 @@
 import "reflect-metadata";
+import { DataSource } from "typeorm";
 import { Categoria } from "entity/Categoria";
 import { Especie } from "entity/Especie";
 import { Funcionario } from "entity/Funcionario";
 import { Pagamento } from "entity/Pagamento";
 import { PagCartao } from "entity/PagCartao";
-import { DataSource } from "typeorm";
+
 import { Cidade } from "./entity/Cidade";
 import { Endereco } from "./entity/Endereco";
 import { Estado } from "./entity/Estado";
@@ -13,7 +14,7 @@ import { Telefone } from "./entity/Telefone";
 import { Pet } from "entity/Pet";
 import { Produto } from "entity/Produto";
 import { Servico } from "entity/Servico";
-import { Raca } from "entity/Raca";
+import { Raca } from "./entity/Raca";
 import { PagDinheiro } from "entity/PagDinheiro";
 
 export const AppDataSource = new DataSource({
@@ -25,7 +26,8 @@ export const AppDataSource = new DataSource({
   database: "d9rrg7vsrbvrv2",
   synchronize: true,
   logging: false,
-  entities: [Cidade,
+  entities: [
+    Cidade,
     Endereco,
     Estado,
     Pessoa,
@@ -39,8 +41,8 @@ export const AppDataSource = new DataSource({
     Pet,
     Produto,
     Raca,
-    Servico],
-  migrations: [],
-  subscribers: [],
-  ssl: { rejectUnauthorized: false }
+    Servico,
+  ],
+  migrations: [`${__dirname}/../infrastructure/migration/**/*.{js,ts}`],
+  ssl: { rejectUnauthorized: false },
 });

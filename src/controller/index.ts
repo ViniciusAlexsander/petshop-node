@@ -1,8 +1,9 @@
 import { Router } from "express";
+import { racaRoutes } from "./racaController";
 
 const router = Router();
 
-// router.use("/users", userRoutes);
+router.use("/raca", racaRoutes);
 
 router.get("/", (req, res) => {
   res.json({ message: "Hello World" });
