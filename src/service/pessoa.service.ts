@@ -23,7 +23,7 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
   alterarPessoa: async function (id: number, nome: string, email: string, codNac: string) {
     try {
       const pessoa = await this.buscarPessoaPorID(id);
-      pessoa.alterarPessoa(nome, email, codNac);
+      pessoa(nome, email, codNac);
       return await this.save(pessoa);
     } catch (error) {
       throw error;

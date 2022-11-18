@@ -24,8 +24,13 @@ export const RacaService = AppDataSource.getRepository(Raca).extend({
 
   alterarRaca: async function (id: number, descricao: string) {
     try {
-      const raca = await this.buscarRacaPorId(id);
-      raca.alterarPessoa(descricao);
+      let raca = await this.buscarRacaPorId(id);
+
+      raca = {
+        ...raca,
+        descricao,
+      };
+
       return await this.save(raca);
     } catch (error) {
       throw error;
