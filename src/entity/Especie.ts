@@ -10,9 +10,8 @@ export class Especie extends Base {
   @OneToMany(() => Pet, (pet) => pet.especie)
   pet: Pet[];
 
-  constructor(descricao: string, pet: Pet[]) {
+  constructor(descricao: string) {
     super();
     this.descricao = descricao;
-    this.pet = pet;
   }
 }
