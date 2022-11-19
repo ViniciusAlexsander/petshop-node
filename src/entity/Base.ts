@@ -1,4 +1,4 @@
-import { BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, VersionColumn, UpdateDateColumn,  } from "typeorm";
+import { BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, Column } from "typeorm";
 
 export default class Base extends BaseEntity {
   @PrimaryGeneratedColumn("increment")
@@ -7,13 +7,13 @@ export default class Base extends BaseEntity {
   @CreateDateColumn()
   createAt: Date;
 
-  @UpdateDateColumn()
+  @Column()
   updatedAt: Date;
 
   @DeleteDateColumn()
   deletedAt: Date | null;
 
-  @VersionColumn()
+  @Column()
   version: number;
 
   constructor() {
@@ -21,10 +21,15 @@ export default class Base extends BaseEntity {
     this.createAt = new Date();
     this.updatedAt = new Date();
     this.deletedAt = null;
-    this.version = 0; 
+    this.version = 0;
   }
 
   invalidar = (): void => {
     this.deletedAt = new Date();
+  }
+
+  atualizar = (): void => {
+    this.updatedAt = new Date();
+    this.version = this.version++;
   }
 }
