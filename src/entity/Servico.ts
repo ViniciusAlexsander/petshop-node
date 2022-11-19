@@ -1,10 +1,12 @@
-import { Entity, Column, OneToOne } from "typeorm"
+import { Pagamento } from './Pagamento';
+import { Produto } from 'entity/Produto';
+import { Pet } from 'entity/Pet';
+import { Entity, Column, ManyToOne, OneToMany, OneToOne } from "typeorm"
 import Base from "./Base"
-import { Pagamento } from "./Pagamento";
-
 
 @Entity("servico")
 export class Servico extends Base {
+
     @Column()
     dataEntrada: Date;
 
@@ -16,6 +18,12 @@ export class Servico extends Base {
 
     @OneToOne(() => Pagamento, pagamento => pagamento.servico)
     pagamento: Pagamento;
+
+		@OneToMany(() => Produto, produto => produto.id)
+		produto: Produto;
+
+		@OneToMany(() => Pet, pet => pet.id)
+		pet: Pet;
 
   constructor(dataEntrada: Date, dataSaida: Date,descricao: string) {
     super();
