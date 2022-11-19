@@ -1,9 +1,13 @@
-import { Entity, Column, ManyToOne, OneToMany } from "typeorm"
+import { Categoria } from 'entity/Categoria';
+import { Entity, Column, OneToMany } from "typeorm"
 import Base from "./Base"
-
 
 @Entity("produto")
 export class Produto extends Base {
+
+		@OneToMany(() => Categoria, categoria => categoria.nome)
+		categoria: Categoria;
+
     @Column()
     nome: string;
 
