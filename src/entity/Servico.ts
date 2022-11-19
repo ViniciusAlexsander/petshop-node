@@ -1,7 +1,7 @@
 import { Pagamento } from './Pagamento';
 import { Produto } from 'entity/Produto';
 import { Pet } from 'entity/Pet';
-import { Entity, Column, ManyToOne, OneToMany, OneToOne } from "typeorm"
+import { Entity, Column, OneToMany, OneToOne } from "typeorm"
 import Base from "./Base"
 
 @Entity("servico")
