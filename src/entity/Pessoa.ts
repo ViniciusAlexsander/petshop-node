@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne, ManyToOne, OneToMany } from "typeorm"
+import { Entity, Column, ManyToOne, OneToMany } from "typeorm"
 import Base from "./Base"
 import { Endereco } from "./Endereco"
 import { Telefone } from "./Telefone"
@@ -32,9 +32,17 @@ export class Pessoa extends Base {
         this.enderecos.push(endereco);
     }
 
+    removerEndereco = (endereco: Endereco): void => {
+        this.enderecos = this.enderecos.filter(e => e.logradouro !== endereco.logradouro); 
+    }
+
     adicionarTelefone = (telefone: Telefone): void => {
         if(!this.telefones) this.telefones = new Array<Telefone>();
         this.telefones.push(telefone);
+    }
+
+    removerTelefone = (telefone: Telefone): void => {
+        this.telefones = this.telefones.filter(t => t.numero !== telefone.numero);
     }
 
     alterarUsuario = (nome: string, email: string, codNac: string): void => {
