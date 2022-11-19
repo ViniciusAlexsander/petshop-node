@@ -6,7 +6,7 @@ export class PagCartao extends Pagamento {
   @Column()
   parcelas: number;
 
-  constructor(parcelas: number, situacao: string) {
+  constructor(parcelas: number, situacao: string, servicoId: number) {
     super(situacao);
 
     this.parcelas = parcelas;
