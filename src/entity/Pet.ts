@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne } from "typeorm";
+import { Entity, Column, ManyToOne, JoinColumn } from "typeorm";
 import Base from "./Base";
 import { Especie } from "./Especie";
 import { Raca } from "./Raca";
@@ -8,10 +8,12 @@ export class Pet extends Base {
   @Column()
   nome: string;
 
-  @ManyToOne(() => Especie, (especie) => especie.pet)
+  @ManyToOne(() => Especie)
+  @JoinColumn({ name: "especieId" })
   especie: Especie;
 
-  @ManyToOne(() => Raca, (raca) => raca.pet)
+  @ManyToOne(() => Raca)
+  @JoinColumn({ name: "racaId" })
   raca: Raca;
 
   @Column()
