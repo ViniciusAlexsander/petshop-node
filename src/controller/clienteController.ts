@@ -6,12 +6,6 @@ export const clienteRoutes = Router();
 clienteRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
   const { nome, email, codNac, tipo } = req.body;
 
-  console.log(nome);
-  console.log(email);
-  console.log(codNac);
-  console.log(tipo);
-
-
   await ClienteService.criarCliente(nome, email, codNac, tipo);
 
   return res.status(201).send();

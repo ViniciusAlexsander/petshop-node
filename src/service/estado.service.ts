@@ -6,8 +6,11 @@ import { CidadeService } from "./cidade.service";
 export const EstadoService = AppDataSource.getRepository(Estado).extend({
     criarEstado: async function (nome: string) {
         try {
-            const estado = new Estado(nome);
-            return await this.save(estado);
+            if (this.estadoValido(nome)) {
+                const estado = new Estado(nome);
+                return await this.save(estado);
+            } else 
+                throw new Error("Estado inválido!")
         } catch (error) {
             throw error;
         }
@@ -17,7 +20,7 @@ export const EstadoService = AppDataSource.getRepository(Estado).extend({
         try {
             const estado: Estado = await this.buscarEstadoPorId(estadoId);
             const cidade: Cidade = await CidadeService.buscarCidadePorId(cidadeId);
-            
+
             estado.adicionarCidade(cidade);
             this.save(estado);
         } catch (error) {
