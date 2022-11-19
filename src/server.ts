@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { AppDataSource } from "./data-source";
 
-import { router } from "./controller";
+import { router } from "./routes/index.routes";
 
 (async () => {
   if (!AppDataSource.isInitialized)

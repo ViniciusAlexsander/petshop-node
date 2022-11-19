@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { especieRoutes } from "./especieController";
-import { pagCartao } from "./pagCartaoController";
-import { petRoutes } from "./petController";
-import { racaRoutes } from "./racaController";
+import { especieRoutes } from "../controller/especieController";
+import { pagCartao } from "../controller/pagCartaoController";
+import { racaRoutes } from "../controller/racaController";
+import { petRoutes } from "../controller/petController";
 
 const router = Router();
 
