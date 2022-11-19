@@ -23,5 +23,9 @@ export class Cidade extends Base {
     if(!this.enderecos) this.enderecos = new Array<Endereco>();
     this.enderecos.push(endereco);
   }
+
+  removerEndereco = (endereco: Endereco): void => {
+    this.enderecos = this.enderecos.filter(e => e.logradouro !== endereco.logradouro)
+  }
     
 }

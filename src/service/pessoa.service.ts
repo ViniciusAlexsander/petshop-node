@@ -1,5 +1,8 @@
+import { Endereco } from "entity/Endereco";
+import { Telefone } from "entity/Telefone";
 import { AppDataSource } from "../data-source";
 import { Pessoa } from "../entity/Pessoa";
+import { EnderecoService } from "./endereco.service";
 
 export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
   criarPessoa: async function (nome: string, email: string, codNac: string) {
@@ -11,9 +14,51 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
     }
   },
 
-  buscarPessoaPorID: async function (id: number) {
+  adicionarEndereco: async function (pessoaId: number, enderecoId: number) {
     try {
-      const pessoa = await this.findOne({ where: { id }, relations: ['endereco'] })
+      const pessoa: Pessoa = await this.buscarPessoaPorId(pessoaId);
+      const endereco: Endereco = await EnderecoService.buscarEnderecoPorId(enderecoId);
+      pessoa.adicionarEndereco(endereco);
+      await this.save(pessoa);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  removerEndereco: async function (pessoaId: number, enderecoId: number) {
+    try {
+      const pessoa: Pessoa = await this.buscarPessoaPorId(pessoaId);
+      const endereco: Endereco = await EnderecoService.buscarEnderecoPorId(enderecoId);
+      pessoa.removerEndereco(endereco);
+      await this.save(pessoa);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  adicionarTelefone: async function (pessoaId: number, telefone: string) {
+    try {
+      const pessoa: Pessoa = await this.buscarPessoaPorId(pessoaId);
+      pessoa.adicionarTelefone(new Telefone(telefone));
+      await this.save(pessoa);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  removerTelefone: async function (pessoaId: number, telefone: string) {
+    try {
+      const pessoa: Pessoa = await this.buscarPessoaPorId(pessoaId);
+      pessoa.removerTelefone(new Telefone(telefone));
+      await this.save(pessoa);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  buscarPessoaPorId: async function (id: number) {
+    try {
+      const pessoa = await this.findOne({ where: { id } })
       return pessoa;
     } catch (error) {
       throw error;
@@ -22,7 +67,7 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   alterarPessoa: async function (id: number, nome: string, email: string, codNac: string) {
     try {
-      const pessoa = await this.buscarPessoaPorID(id);
+      const pessoa = await this.buscarPessoaPorId(id);
       pessoa(nome, email, codNac);
       return await this.save(pessoa);
     } catch (error) {
@@ -32,7 +77,7 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   deletarPessoa: async function (id: number) {
     try {
-      const pessoa: Pessoa = await this.buscarPessoaPorID(id);
+      const pessoa: Pessoa = await this.buscarPessoaPorId(id);
       pessoa.invalidar();
       await this.save(pessoa);
     } catch (error) {
