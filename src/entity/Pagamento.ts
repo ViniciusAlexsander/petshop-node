@@ -10,8 +10,9 @@ export class Pagamento extends Base {
   @OneToOne(() => Servico , servico => servico.pagamento)
   servico: Servico;
 
-  constructor(situacao: string) {
+  constructor(situacao: string, servico: Servico) {
     super();
     this.situacao = situacao;
+    this.servico = servico;
   }
 }
