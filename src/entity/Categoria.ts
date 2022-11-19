@@ -7,7 +7,7 @@ export class Categoria extends Base {
 	nome: string;
 
 	@ManyToMany(() => Produto, produto => produto.nome)
-	produto: Produto;
+	produto: Produto[];
 
 	constructor(nome:string) {
 		super();
