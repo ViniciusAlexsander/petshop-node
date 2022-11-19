@@ -1,3 +1,4 @@
+import { Servico } from "entity/Servico";
 import { AppDataSource } from "../data-source";
 import { PagCartao } from "../entity/PagCartao";
 
@@ -10,7 +11,9 @@ export const PagamentoCartaoService = AppDataSource.getRepository(
     servicoId: number
   ) {
     try {
-      const pagCartao = new PagCartao(parcelas, situacao, servicoId);
+      // const servico = new Servico.buscarServicoPorId(servicoId)
+      const servico: Servico = null;
+      const pagCartao = new PagCartao(parcelas, situacao, servico);
       return await this.save(pagCartao);
     } catch (error) {
       throw error;
