@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { especieRoutes } from "../controller/especieController";
-import { pagCartao } from "../controller/pagCartaoController";
+import { pagCartaoRoutes } from "../controller/pagCartaoController";
 import { racaRoutes } from "../controller/racaController";
 import { petRoutes } from "../controller/petController";
-import { pagDinheiro } from "controller/pagDinheiroController";
+import { pagDinheiroRoutes } from "controller/pagDinheiroController";
 import { pessoaRoutes } from "controller/pessoaController";
+import { servicoRoutes } from "controller/servicoController";
 
 const router = Router();
 
@@ -15,8 +16,9 @@ router.use("/estado", pessoaRoutes);
 router.use("/raca", racaRoutes);
 router.use("/especie", especieRoutes);
 router.use("/pet", petRoutes);
-router.use("/pag-cartao", pagCartao);
-router.use("/pag-dinheiro", pagDinheiro);
+router.use("/pag-cartao", pagCartaoRoutes);
+router.use("/pag-dinheiro", pagDinheiroRoutes);
+router.use("/servico", servicoRoutes);
 
 router.get("/", (req, res) => {
   res.json({ message: "Hello World" });
