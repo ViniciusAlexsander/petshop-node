@@ -69,12 +69,7 @@ export const PetService = AppDataSource.getRepository(Pet).extend({
         idade,
       };
 
-      await this.save(pet);
-
-      return await this.findOne({
-        where: { id },
-        relations: ["raca", "especie"],
-      });
+      return await this.save(pet);
     } catch (error) {
       throw error;
     }
