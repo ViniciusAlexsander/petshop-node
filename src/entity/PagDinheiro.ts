@@ -1,4 +1,4 @@
-import { Entity, Column } from "typeorm"
+import { Entity, Column, OneToOne, JoinColumn } from "typeorm";
 import { Pagamento } from "./Pagamento";
 import { Servico } from "./Servico";
 
@@ -10,11 +10,22 @@ export class PagDinheiro extends Pagamento {
   @Column()
   dataPagamento: Date;
 
-  constructor(dataVencimento: Date, dataPagamento: Date, situacao: string, servico: Servico) {
-    super(situacao, servico);
+  @OneToOne(() => Servico, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn()
+  servico: Servico;
+
+  constructor(
+    dataVencimento: Date,
+    dataPagamento: Date,
+    situacao: string,
+    servico: Servico
+  ) {
+    super(situacao);
 
     this.dataVencimento = dataVencimento;
     this.dataPagamento = dataPagamento;
+    this.servico = servico;
   }
 }
-

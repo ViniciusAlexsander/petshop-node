@@ -1,18 +1,12 @@
-import { Entity, Column, OneToOne } from "typeorm"
-import Base from "./Base"
-import { Servico } from "./Servico";
+import Base from "./Base";
+import { Column } from "typeorm";
 
-@Entity("pagamento")
-export class Pagamento extends Base {
+export abstract class Pagamento extends Base {
   @Column()
   situacao: string;
 
-  @OneToOne(() => Servico , servico => servico.pagamento)
-  servico: Servico;
-
-  constructor(situacao: string, servico: Servico) {
+  constructor(situacao: string) {
     super();
     this.situacao = situacao;
-    this.servico = servico;
   }
 }
