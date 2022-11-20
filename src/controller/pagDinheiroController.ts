@@ -6,58 +6,78 @@ export const pagDinheiro = Router();
 pagDinheiro.post(
   "/",
   async (req: Request, res: Response): Promise<Response> => {
-    const { dataVencimento, dataPagamento, situacao, servicoId } = req.body;
+    try {
+      const { dataVencimento, dataPagamento, situacao, servicoId } = req.body;
 
-    await PagamentoDinheiroService.criarPagDinheiro(
-      dataVencimento,
-      dataPagamento,
-      situacao,
-      servicoId
-    );
+      await PagamentoDinheiroService.criarPagDinheiro(
+        dataVencimento,
+        dataPagamento,
+        situacao,
+        servicoId
+      );
 
-    return res.status(201).send();
+      return res.status(201).send();
+    } catch (error) {
+      return res.status(500).send("Error:" + error.message);
+    }
   }
 );
 
 pagDinheiro.get("/", async (req: Request, res: Response): Promise<Response> => {
-  const pagDinheiro = await PagamentoDinheiroService.find();
+  try {
+    const pagDinheiro = await PagamentoDinheiroService.find();
 
-  return res.status(200).json(pagDinheiro);
+    return res.status(200).json(pagDinheiro);
+  } catch (error) {
+    return res.status(500).send("Error:" + error.message);
+  }
 });
 
 pagDinheiro.get(
   "/:id",
   async (req: Request, res: Response): Promise<Response> => {
-    const { id } = req.params;
+    try {
+      const { id } = req.params;
 
-    const pagDinheiro = await PagamentoDinheiroService.buscarPagDinheiroPorId(
-      Number(id)
-    );
+      const pagDinheiro = await PagamentoDinheiroService.buscarPagDinheiroPorId(
+        Number(id)
+      );
 
-    return res.status(200).json(pagDinheiro);
+      return res.status(200).json(pagDinheiro);
+    } catch (error) {
+      return res.status(500).send("Error:" + error.message);
+    }
   }
 );
 
 pagDinheiro.put("/", async (req: Request, res: Response): Promise<Response> => {
-  const { id, dataVencimento, dataPagamento, situacao } = req.body;
+  try {
+    const { id, dataVencimento, dataPagamento, situacao } = req.body;
 
-  const pagDinheiro = await PagamentoDinheiroService.alterarPagDinheiro(
-    Number(id),
-    dataVencimento,
-    dataPagamento,
-    situacao
-  );
+    const pagDinheiro = await PagamentoDinheiroService.alterarPagDinheiro(
+      Number(id),
+      dataVencimento,
+      dataPagamento,
+      situacao
+    );
 
-  return res.status(200).json(pagDinheiro);
+    return res.status(200).json(pagDinheiro);
+  } catch (error) {
+    return res.status(500).send("Error:" + error.message);
+  }
 });
 
 pagDinheiro.delete(
   "/:id",
   async (req: Request, res: Response): Promise<Response> => {
-    const { id } = req.params;
+    try {
+      const { id } = req.params;
 
-    await PagamentoDinheiroService.deletarPagDinheiro(Number(id));
+      await PagamentoDinheiroService.deletarPagDinheiro(Number(id));
 
-    return res.status(200).json();
+      return res.status(200).json();
+    } catch (error) {
+      return res.status(500).send("Error:" + error.message);
+    }
   }
 );
