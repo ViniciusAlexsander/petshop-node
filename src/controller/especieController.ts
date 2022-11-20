@@ -8,8 +8,6 @@ especieRoutes.post(
   async (req: Request, res: Response): Promise<Response> => {
     const { descricao } = req.body;
 
-    console.log(descricao);
-
     await EspecieService.criarEspecie(descricao);
 
     return res.status(201).send();

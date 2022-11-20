@@ -7,9 +7,9 @@ export const petRoutes = Router();
 petRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
   const { nome, idEspecie, idRaca, idade } = req.body;
 
-  await PetService.criarPet(nome, idEspecie, idRaca, idade);
+  const pet = await PetService.criarPet(nome, idEspecie, idRaca, idade);
 
-  return res.status(201).send();
+  return res.status(201).json(pet);
 });
 
 petRoutes.get(
