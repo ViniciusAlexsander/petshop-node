@@ -29,9 +29,9 @@ funcionarioRoutes.get(
 );
 
 funcionarioRoutes.put("/", async (req: Request, res: Response): Promise<Response> => {
-  const { id, descricao } = req.body;
+  const { id, nome, email, codNac, funcao } = req.body;
 
-  const funcionario = await FuncionarioService.alterarFuncionario(Number(id), descricao);
+  const funcionario = await FuncionarioService.alterarFuncionario(Number(id), nome, email, codNac, funcao);
 
   return res.status(200).json(funcionario);
 });

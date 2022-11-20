@@ -6,8 +6,8 @@ export class Categoria extends Base {
 	@Column()
 	nome: string;
 
-	@ManyToMany(() => Produto, produto => produto.nome)
-	produto: Produto;
+	@ManyToMany(() => Produto, (produto) => produto.nome)
+	produto: Produto[];
 
 	constructor(nome:string) {
 		super();

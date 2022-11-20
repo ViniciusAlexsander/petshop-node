@@ -6,7 +6,7 @@ import Base from "./Base"
 export class Produto extends Base {
 
 		@OneToMany(() => Categoria, categoria => categoria.nome)
-		categoria: Categoria;
+		categoria: Categoria[];
 
     @Column()
     nome: string;

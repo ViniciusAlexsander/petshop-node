@@ -22,13 +22,16 @@ export const FuncionarioService = AppDataSource.getRepository(Funcionario).exten
       }
     },
   
-    alterarFuncionario: async function (id: number, descricao: string) {
+    alterarFuncionario: async function (id: number, nome: string, email: string, codNac: string, funcao: string) {
       try {
         let funcionario = await this.buscarFuncionarioPorId(id);
   
         funcionario = {
           ...funcionario,
-          descricao,
+          nome,
+          email,
+          codNac,
+          funcao
         };
   
         return await this.save(funcionario);
