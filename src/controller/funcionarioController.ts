@@ -6,20 +6,12 @@ export const funcionarioRoutes = Router();
 funcionarioRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
   const { nome, email, codNac, funcao } = req.body;
 
-  console.log(nome);
-  console.log(email);
-  console.log(codNac);
-  console.log(funcao);
-
-
   await FuncionarioService.criarFuncionario(nome, email, codNac, funcao);
 
   return res.status(201).send();
 });
 
-funcionarioRoutes.get(
-  "/:id",
-  async (req: Request, res: Response): Promise<Response> => {
+funcionarioRoutes.get("/:id", async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
 
     const funcionario = await FuncionarioService.buscarFuncionarioPorId(Number(id));

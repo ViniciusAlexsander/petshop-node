@@ -6,8 +6,6 @@ export const categoriaRoutes = Router();
 categoriaRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
   const { nome, preco } = req.body;
 
-  console.log(nome);
-
   await CategoriaService.criarCategoria(nome, preco);
 
   return res.status(201).send();

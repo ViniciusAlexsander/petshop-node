@@ -65,6 +65,15 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
     }
   },
 
+  buscarPessoaPorEmail: async function (email: string) {
+    try {
+      const pessoa = await this.findOne({ where: { email } })
+      return pessoa;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   alterarPessoa: async function (id: number, nome: string, email: string, codNac: string) {
     try {
       const pessoa = await this.buscarPessoaPorId(id);

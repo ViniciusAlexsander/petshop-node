@@ -4,9 +4,14 @@ import { pagCartao } from "../controller/pagCartaoController";
 import { racaRoutes } from "../controller/racaController";
 import { petRoutes } from "../controller/petController";
 import { pagDinheiro } from "controller/pagDinheiroController";
+import { pessoaRoutes } from "controller/pessoaController";
 
 const router = Router();
 
+router.use("/pessoa", pessoaRoutes);
+router.use("/endereco", pessoaRoutes);
+router.use("/cidade", pessoaRoutes);
+router.use("/estado", pessoaRoutes);
 router.use("/raca", racaRoutes);
 router.use("/especie", especieRoutes);
 router.use("/pet", petRoutes);
