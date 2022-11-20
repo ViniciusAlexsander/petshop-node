@@ -3,17 +3,16 @@ import { ProdutoService } from "service/produto.service";
 
 export const produtoRoutes = Router();
 
-produtoRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
-  const { nome, preco } = req.body;
+produtoRoutes.post(
+  "/",
+  async (req: Request, res: Response): Promise<Response> => {
+    const { nome, preco } = req.body;
 
-  console.log(nome);
-  console.log(preco);
+    await ProdutoService.criarProduto(nome, preco);
 
-
-  await ProdutoService.criarProduto(nome, preco);
-
-  return res.status(201).send();
-});
+    return res.status(201).send();
+  }
+);
 
 produtoRoutes.get(
   "/:id",
@@ -26,13 +25,20 @@ produtoRoutes.get(
   }
 );
 
-produtoRoutes.put("/", async (req: Request, res: Response): Promise<Response> => {
-  const { id, nome, preco } = req.body;
+produtoRoutes.put(
+  "/",
+  async (req: Request, res: Response): Promise<Response> => {
+    const { id, nome, preco } = req.body;
 
-  const produto = await ProdutoService.alterarProduto(Number(id), nome, preco);
+    const produto = await ProdutoService.alterarProduto(
+      Number(id),
+      nome,
+      preco
+    );
 
-  return res.status(200).json(produto);
-});
+    return res.status(200).json(produto);
+  }
+);
 
 produtoRoutes.delete(
   "/:id",
