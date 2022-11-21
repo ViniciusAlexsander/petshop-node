@@ -34,6 +34,11 @@ export const PetService = AppDataSource.getRepository(Pet).extend({
         where: { id },
         relations: ["raca", "especie"],
       });
+
+      if (!pet) {
+        throw new Error("Pet não existe");
+      }
+
       return pet;
     } catch (error) {
       throw error;
