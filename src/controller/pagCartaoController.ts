@@ -12,8 +12,6 @@ pagCartaoRoutes.post(
       const { parcelas, situacao, servicoId } = req.body;
 
       const servico: Servico = await servicoService.buscarServicoId(servicoId);
-      console.log('====================================================================')
-      console.log(servico)
       if (!servico) throw new Error("Serviço não encontrado");
 
       if (servico.pagCartao || servico.pagDinheiro)

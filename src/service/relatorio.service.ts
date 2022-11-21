@@ -13,7 +13,6 @@ export const RelatorioService = AppDataSource.getRepository(Servico).extend({
         where: { createAt: dataFinal },
       });
 
-      console.log({ servico });
       return servicos;
     } catch (error) {
       throw error;

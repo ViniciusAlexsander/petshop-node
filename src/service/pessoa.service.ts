@@ -38,9 +38,7 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   adicionarTelefone: async function (pessoaId: number, telefone: string) {
     try {
-      console.log({ pessoaId, telefone })
       const pessoa: Pessoa = await this.buscarPessoaPorId(pessoaId);
-      console.log(pessoa)
       pessoa.adicionarTelefone(new Telefone(telefone));
       await this.save(pessoa);
     } catch (error) {

@@ -23,8 +23,6 @@ pessoaEnderecoRoutes.delete("/:id/:enderecoId", async (req: Request, res: Respon
     try {
         const { id, enderecoId } = req.params;
 
-        console.log(req.params);
-
         const pessoaExiste = await PessoaService.buscarPessoaPorId(+id);
         if(!pessoaExiste) return res.status(400).send("Pessoa não existe");
 

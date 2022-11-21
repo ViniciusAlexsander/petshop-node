@@ -7,8 +7,7 @@ export const pessoaRoutes = Router();
 pessoaRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
     try {
         const { nome, email, codNac } = req.body;
-        console.log(req.body)
-
+        
         const pessoaExiste = await PessoaService.buscarPessoaPorEmail(email);
         if(pessoaExiste) return res.status(400).send("Pessoa já existe");
 
