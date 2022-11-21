@@ -8,7 +8,7 @@ export class Produto extends Base {
     @Column()
     nome: string;
 
-    @Column()
+    @Column("decimal", { precision: 5, scale: 2,nullable: true })
     preco: number;
 
 		@OneToMany(() => Categoria, categoria => categoria.produto)

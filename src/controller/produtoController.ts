@@ -8,7 +8,7 @@ produtoRoutes.post(
   async (req: Request, res: Response): Promise<Response> => {
     const { nome, preco } = req.body;
 
-    await ProdutoService.criarProduto(nome, preco);
+    await ProdutoService.criarProduto(nome, Number(preco));
 
     return res.status(201).send();
   }
