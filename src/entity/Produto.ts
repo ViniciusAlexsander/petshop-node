@@ -28,7 +28,7 @@ export class Produto extends Base {
     this.categoria.push(categoria);
   }
 
-  removerEndereco = (categoria: Categoria): void => {
+  removerCategoria= (categoria: Categoria): void => {
     this.categoria = this.categoria.filter(e => e.nome !== categoria.nome)
   }
 }

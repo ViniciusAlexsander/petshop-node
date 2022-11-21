@@ -12,6 +12,7 @@ import { pessoaTelefoneRoutes } from "controller/pessoaTelefoneController";
 import { pessoaEnderecoRoutes } from "controller/pessoaEnderecoController";
 import { relatorioRoutes } from "controller/relatorioController";
 import { servicoRoutes } from "controller/servicoController";
+import { produtoRoutes } from 'controller/produtoController';
 
 const router = Router();
 
@@ -26,6 +27,7 @@ router.use("/especie", especieRoutes);
 router.use("/pet", petRoutes);
 router.use("/pag-cartao", pagCartaoRoutes);
 router.use("/pag-dinheiro", pagDinheiroRoutes);
+router.use("/produto",produtoRoutes)
 router.use("/servico", servicoRoutes);
 router.use("/relatorio", relatorioRoutes);
 
