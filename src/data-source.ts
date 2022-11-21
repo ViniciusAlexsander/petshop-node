@@ -35,7 +35,6 @@ export const AppDataSource = new DataSource({
     Categoria,
     Especie,
     Funcionario,
-    Pagamento,
     PagDinheiro,
     PagCartao,
     Pet,

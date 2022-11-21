@@ -7,6 +7,7 @@ export const pessoaRoutes = Router();
 pessoaRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
     try {
         const { nome, email, codNac } = req.body;
+        console.log(req.body)
 
         const pessoaExiste = await PessoaService.buscarPessoaPorEmail(email);
         if(pessoaExiste) return res.status(400).send("Pessoa já existe");
@@ -19,37 +20,6 @@ pessoaRoutes.post("/", async (req: Request, res: Response): Promise<Response> =>
     }
 });
 
-pessoaRoutes.post("/:id/:enderecoId", async (req: Request, res: Response): Promise<Response> => {
-    try {
-        const { id, enderecoId } = req.params;
-
-        const endereco = await EnderecoService.buscarEnderecoPorId(+enderecoId)
-
-        if (!endereco) return res.status(404).send("Endereço não encontrado");
-
-        const pessoa = await PessoaService.adicionarEndereco(+id, +enderecoId);
-
-        return res.status(201).send(pessoa);
-    } catch (error) {
-        return res.status(500).send("Error:" + error.message);
-    }
-});
-
-pessoaRoutes.post("/:id", async (req: Request, res: Response): Promise<Response> => {
-    try {
-        const { id } = req.params;
-        const { telefone } = req.body;
-
-        const pessoaExiste = await PessoaService.buscarPessoaPorId(+id);
-        if(!pessoaExiste) return res.status(400).send("Pessoa não existe");
-        
-        const pessoa = await PessoaService.adicionarTelefone(+id, telefone);
-
-        return res.status(201).send(pessoa);
-    } catch (error) {
-        return res.status(500).send("Error:" + error.message);
-    }
-});
 
 pessoaRoutes.get("/:id", async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -94,25 +64,3 @@ pessoaRoutes.delete("/:id", async (req: Request, res: Response): Promise<Respons
         return res.status(500).send("Error:" + error.message);
     }
 });
-
-pessoaRoutes.delete("/:id/:enderecoId", async (req: Request, res: Response): Promise<Response> => {
-    try {
-        const { id, enderecoId } = req.params;
-
-        const pessoaExiste = await PessoaService.buscarPessoaPorId(+id);
-        if(!pessoaExiste) return res.status(400).send("Pessoa não existe");
-
-        const endereco = await EnderecoService.buscarEnderecoPorId(+enderecoId)
-
-        if (!endereco) return res.status(404).send("Endereço não encontrado");
-
-        const pessoa = await PessoaService.removerEndereco(+id, +enderecoId);
-
-        return res.status(201).send(pessoa);
-    } catch (error) {
-        return res.status(500).send("Error:" + error.message);
-    }
-});
-
-
-

@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
 import { PagamentoDinheiroService } from "service/pagamento-dinheiro.service";
 
-export const pagDinheiro = Router();
+export const pagDinheiroRoutes = Router();
 
-pagDinheiro.post(
+pagDinheiroRoutes.post(
   "/",
   async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -23,7 +23,7 @@ pagDinheiro.post(
   }
 );
 
-pagDinheiro.get("/", async (req: Request, res: Response): Promise<Response> => {
+pagDinheiroRoutes.get("/", async (req: Request, res: Response): Promise<Response> => {
   try {
     const pagDinheiro = await PagamentoDinheiroService.find();
 
@@ -33,7 +33,7 @@ pagDinheiro.get("/", async (req: Request, res: Response): Promise<Response> => {
   }
 });
 
-pagDinheiro.get(
+pagDinheiroRoutes.get(
   "/:id",
   async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -50,7 +50,7 @@ pagDinheiro.get(
   }
 );
 
-pagDinheiro.put("/", async (req: Request, res: Response): Promise<Response> => {
+pagDinheiroRoutes.put("/", async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id, dataVencimento, dataPagamento, situacao } = req.body;
 
@@ -67,7 +67,7 @@ pagDinheiro.put("/", async (req: Request, res: Response): Promise<Response> => {
   }
 });
 
-pagDinheiro.delete(
+pagDinheiroRoutes.delete(
   "/:id",
   async (req: Request, res: Response): Promise<Response> => {
     try {

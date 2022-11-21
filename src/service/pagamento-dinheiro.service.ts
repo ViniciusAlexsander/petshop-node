@@ -1,6 +1,6 @@
-import { Servico } from "entity/Servico";
 import { AppDataSource } from "../data-source";
 import { PagDinheiro } from "../entity/PagDinheiro";
+import { servicoService } from "./servico.service";
 
 export const PagamentoDinheiroService = AppDataSource.getRepository(
   PagDinheiro
@@ -12,8 +12,7 @@ export const PagamentoDinheiroService = AppDataSource.getRepository(
     servicoId: number
   ) {
     try {
-      // const servico = new Servico.buscarServicoPorId(servicoId)
-      const servico: Servico = null;
+      const servico = await servicoService.buscarServicoId(servicoId);
       const pagDinheiro = new PagDinheiro(
         dataVencimento,
         dataPagamento,

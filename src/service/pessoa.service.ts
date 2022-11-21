@@ -38,6 +38,7 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   adicionarTelefone: async function (pessoaId: number, telefone: string) {
     try {
+      console.log({pessoaId, telefone})
       const pessoa: Pessoa = await this.buscarPessoaPorId(pessoaId);
       pessoa.adicionarTelefone(new Telefone(telefone));
       await this.save(pessoa);
@@ -48,6 +49,8 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   removerTelefone: async function (pessoaId: number, telefone: string) {
     try {
+      console.log({pessoaId, telefone})
+
       const pessoa: Pessoa = await this.buscarPessoaPorId(pessoaId);
       pessoa.removerTelefone(new Telefone(telefone));
       await this.save(pessoa);
@@ -58,7 +61,7 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   buscarPessoaPorId: async function (id: number) {
     try {
-      const pessoa = await this.findOne({ where: { id } })
+      const pessoa = await this.findOne({ where: { id }, relations: ["telefones", "enderecos"] })
       return pessoa;
     } catch (error) {
       throw error;

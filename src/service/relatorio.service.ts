@@ -1,67 +1,20 @@
-import { Especie } from "entity/Especie";
-import { Raca } from "entity/Raca";
+import { Servico } from "entity/Servico";
+import { Between } from "typeorm";
 import { AppDataSource } from "../data-source";
-import { Pet } from "../entity/Pet";
 
-export const ServicoService = AppDataSource.getRepository(Pet).extend({
-  criarPet: async function (
-    nome: string,
-    especieId: number,
-    racaId: number,
-    idade: number
-  ) {
+export const RelatorioService = AppDataSource.getRepository(Servico).extend({
+  solicitarRelatorio: async function (dataInicial: Date, dataFinal: Date) {
     try {
-      const pet = this.create({
-        nome,
-        especieId,
-        racaId,
-        idade,
+      const servicos = await this.find({
+        where: { createAt: Between(dataInicial, dataFinal) },
       });
 
-      return await this.save(pet);
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  buscarPetPorId: async function (id: number) {
-    try {
-      const pet = await this.findOne({
-        where: { id },
+      const servico = await this.find({
+        where: { createAt: dataFinal },
       });
-      return pet;
-    } catch (error) {
-      throw error;
-    }
-  },
 
-  alterarPet: async function (
-    id: number,
-    nome: string,
-    especieId: number,
-    racaId: number,
-    idade: number
-  ) {
-    try {
-      let pet = await this.buscarPetPorId(id);
-
-      pet = {
-        ...pet,
-        nome,
-        especieId,
-        racaId,
-        idade,
-      };
-
-      return await this.save(pet);
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  deletarPet: async function (id: number) {
-    try {
-      await this.delete(id);
+      console.log({ servico });
+      return servicos;
     } catch (error) {
       throw error;
     }

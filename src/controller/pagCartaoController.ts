@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
 import { PagamentoCartaoService } from "service/pagamento-cartao.service";
 
-export const pagCartao = Router();
+export const pagCartaoRoutes = Router();
 
-pagCartao.post("/", async (req: Request, res: Response): Promise<Response> => {
+pagCartaoRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
   try {
     const { parcelas, situacao, servicoId } = req.body;
 
@@ -15,7 +15,7 @@ pagCartao.post("/", async (req: Request, res: Response): Promise<Response> => {
   }
 });
 
-pagCartao.get("/", async (req: Request, res: Response): Promise<Response> => {
+pagCartaoRoutes.get("/", async (req: Request, res: Response): Promise<Response> => {
   try {
     const pagCartao = await PagamentoCartaoService.find();
 
@@ -25,7 +25,7 @@ pagCartao.get("/", async (req: Request, res: Response): Promise<Response> => {
   }
 });
 
-pagCartao.get(
+pagCartaoRoutes.get(
   "/:id",
   async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -41,7 +41,7 @@ pagCartao.get(
   }
 );
 
-pagCartao.put("/", async (req: Request, res: Response): Promise<Response> => {
+pagCartaoRoutes.put("/", async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id, parcelas, situacao } = req.body;
 
@@ -57,7 +57,7 @@ pagCartao.put("/", async (req: Request, res: Response): Promise<Response> => {
   }
 });
 
-pagCartao.delete(
+pagCartaoRoutes.delete(
   "/:id",
   async (req: Request, res: Response): Promise<Response> => {
     try {
