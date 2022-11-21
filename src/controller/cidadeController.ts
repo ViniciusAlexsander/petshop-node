@@ -25,9 +25,9 @@ cidadeRoutes.get("/:id", async (req: Request, res: Response): Promise<Response> 
     }
 });
 
-cidadeRoutes.get("/", async (req: Request, res: Response): Promise<Response> => {
+cidadeRoutes.get("/nome/:nome", async (req: Request, res: Response): Promise<Response> => {
     try {
-        const { nome } = req.body;
+        const { nome } = req.params;
         const endereco = await CidadeService.buscarCidadePorNome(nome);
         return res.status(200).send(endereco);
     } catch (error) {

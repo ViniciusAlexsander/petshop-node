@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, OneToMany } from "typeorm"
+import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm"
 import Base from "./Base"
 import { Endereco } from "./Endereco"
 import { Telefone } from "./Telefone"
@@ -14,11 +14,12 @@ export class Pessoa extends Base {
     @Column()
     codNac: string;
 
-    @OneToMany(() => Endereco, endereco => endereco.pessoa)
-    enderecos: Endereco[];
+    @OneToMany(() => Endereco, endereco => endereco.pessoa, { eager: true, cascade: true })
+    endereco: Endereco[];
 
-    @ManyToOne(() => Telefone, telefone => telefone.pessoa)
-    telefones: Telefone[]
+    @OneToMany(() => Telefone, telefone => telefone.pessoa, { eager: true, cascade: true })
+    @JoinColumn()
+    telefone: Telefone[]
 
     constructor(nome: string, email: string, codNac: string) {
         super();
@@ -28,21 +29,21 @@ export class Pessoa extends Base {
     }
 
     adicionarEndereco = (endereco: Endereco): void => {
-        if(!this.enderecos) this.enderecos = new Array<Endereco>();
-        this.enderecos.push(endereco);
+        if(!this.endereco) this.endereco = new Array<Endereco>();
+        this.endereco.push(endereco);
     }
 
     removerEndereco = (endereco: Endereco): void => {
-        this.enderecos = this.enderecos.filter(e => e.logradouro !== endereco.logradouro); 
+        this.endereco = this.endereco.filter(e => e.logradouro !== endereco.logradouro); 
     }
 
     adicionarTelefone = (telefone: Telefone): void => {
-        if(!this.telefones) this.telefones = new Array<Telefone>();
-        this.telefones.push(telefone);
+        if(!this.telefone) this.telefone = new Array<Telefone>();
+        this.telefone.push(telefone);
     }
 
     removerTelefone = (telefone: Telefone): void => {
-        this.telefones = this.telefones.filter(t => t.numero !== telefone.numero);
+        this.telefone = this.telefone.filter(t => t.numero !== telefone.numero);
     }
 
     alterarUsuario = (nome: string, email: string, codNac: string): void => {

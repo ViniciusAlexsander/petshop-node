@@ -9,6 +9,7 @@ export class PagCartao extends Pagamento {
 
   @OneToOne(() => Servico, {
     onDelete: "CASCADE",
+    onUpdate: "CASCADE",
   })
   @JoinColumn()
   servico: Servico;

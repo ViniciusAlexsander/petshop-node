@@ -1,29 +1,49 @@
+import { Servico } from "entity/Servico";
 import { Router, Request, Response } from "express";
 import { PagamentoCartaoService } from "service/pagamento-cartao.service";
+import { servicoService } from "service/servico.service";
 
 export const pagCartaoRoutes = Router();
 
-pagCartaoRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
-  try {
-    const { parcelas, situacao, servicoId } = req.body;
+pagCartaoRoutes.post(
+  "/",
+  async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const { parcelas, situacao, servicoId } = req.body;
 
-    await PagamentoCartaoService.criarPagCartao(parcelas, situacao, servicoId);
+      const servico: Servico = await servicoService.buscarServicoId(servicoId);
+      console.log('====================================================================')
+      console.log(servico)
+      if (!servico) throw new Error("Serviço não encontrado");
 
-    return res.status(201).send();
-  } catch (error) {
-    return res.status(500).send("Error:" + error.message);
+      if (servico.pagCartao || servico.pagDinheiro)
+        throw new Error("Pagamento já cadastrado");
+
+      await PagamentoCartaoService.criarPagCartao(
+        parcelas,
+        situacao,
+        servico
+      );
+
+      return res.status(201).send();
+    } catch (error) {
+      return res.status(500).send("Error:" + error.message);
+    }
   }
-});
+);
 
-pagCartaoRoutes.get("/", async (req: Request, res: Response): Promise<Response> => {
-  try {
-    const pagCartao = await PagamentoCartaoService.find();
+pagCartaoRoutes.get(
+  "/",
+  async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const pagCartao = await PagamentoCartaoService.find();
 
-    return res.status(200).json(pagCartao);
-  } catch (error) {
-    return res.status(500).send("Error:" + error.message);
+      return res.status(200).json(pagCartao);
+    } catch (error) {
+      return res.status(500).send("Error:" + error.message);
+    }
   }
-});
+);
 
 pagCartaoRoutes.get(
   "/:id",
@@ -41,21 +61,24 @@ pagCartaoRoutes.get(
   }
 );
 
-pagCartaoRoutes.put("/", async (req: Request, res: Response): Promise<Response> => {
-  try {
-    const { id, parcelas, situacao } = req.body;
+pagCartaoRoutes.put(
+  "/",
+  async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const { id, parcelas, situacao } = req.body;
 
-    const pagCartao = await PagamentoCartaoService.alterarPagCartao(
-      Number(id),
-      parcelas,
-      situacao
-    );
+      const pagCartao = await PagamentoCartaoService.alterarPagCartao(
+        Number(id),
+        parcelas,
+        situacao
+      );
 
-    return res.status(200).json(pagCartao);
-  } catch (error) {
-    return res.status(500).send("Error:" + error.message);
+      return res.status(200).json(pagCartao);
+    } catch (error) {
+      return res.status(500).send("Error:" + error.message);
+    }
   }
-});
+);
 
 pagCartaoRoutes.delete(
   "/:id",

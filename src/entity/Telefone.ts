@@ -1,4 +1,4 @@
-import { Entity, Column, OneToMany } from "typeorm"
+import { Entity, Column, OneToMany, ManyToOne } from "typeorm"
 import Base from "./Base"
 import { Pessoa } from "./Pessoa";
 
@@ -7,7 +7,7 @@ export class Telefone extends Base {
     @Column()
     numero: string
 
-    @OneToMany(() => Pessoa, pessoa => pessoa.telefones)
+    @ManyToOne(() => Pessoa, pessoa => pessoa.telefone)
     pessoa: Pessoa;
 
     constructor(telefone: string) {
