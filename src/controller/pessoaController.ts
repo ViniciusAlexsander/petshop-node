@@ -42,7 +42,9 @@ pessoaRoutes.put("/:id", async (req: Request, res: Response): Promise<Response> 
         const pessoaExiste = await PessoaService.buscarPessoaPorId(+id);
         if(!pessoaExiste) return res.status(400).send("Pessoa não existe");
 
-        const pessoa = await PessoaService.alterarPessoa(+id, name, email, codNac);
+        await PessoaService.alterarPessoa(+id, name, email, codNac);
+
+        const pessoa = await PessoaService.buscarPessoaPorId(+id);
 
         return res.status(201).send(pessoa);
     } catch (error) {

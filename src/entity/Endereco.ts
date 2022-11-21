@@ -1,9 +1,9 @@
-import { Entity,  Column, OneToMany, ManyToOne } from "typeorm"
+import { Entity,  Column, OneToMany, ManyToOne, JoinColumn } from "typeorm"
 import Base from "./Base"
 import { Cidade } from "./Cidade";
 import { Pessoa } from "./Pessoa";
 
-@Entity("enderecos")
+@Entity("endereco")
 export class Endereco extends Base {
     @Column()
     logradouro: string;
@@ -20,10 +20,12 @@ export class Endereco extends Base {
     @Column()
     cep: string;
 
-    @OneToMany(() => Pessoa, pessoa => pessoa.enderecos)
+    @ManyToOne(() => Pessoa, pessoa => pessoa.endereco)
+    @JoinColumn()
     pessoa: Pessoa;
 
-    @ManyToOne(() => Cidade, cidade => cidade.enderecos)
+    @ManyToOne(() => Cidade, cidade => cidade.endereco)
+    @JoinColumn()
     cidade: Cidade;
     
     constructor(logradouro: string, numero: number, complemento: string, bairro: string, cep: string, cidade: Cidade, pessoa: Pessoa) {

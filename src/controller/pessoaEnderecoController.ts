@@ -7,8 +7,6 @@ export const pessoaEnderecoRoutes = Router();
 pessoaEnderecoRoutes.post("/:id/:enderecoId", async (req: Request, res: Response): Promise<Response> => {
     try {
         const { id, enderecoId } = req.params;
-        console.log(req.params);
-
         const endereco = await EnderecoService.buscarEnderecoPorId(+enderecoId)
 
         if (!endereco) return res.status(404).send("Endereço não encontrado");

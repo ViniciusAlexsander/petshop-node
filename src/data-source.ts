@@ -25,7 +25,7 @@ export const AppDataSource = new DataSource({
   password: "f31aa5561ca0e5f88db3a1f0211ebfbf657cd3b17a1b40116dc5374bc433df4e",
   database: "d9rrg7vsrbvrv2",
   synchronize: true,
-  logging: false,
+  logging: true,
   entities: [
     Cidade,
     Endereco,

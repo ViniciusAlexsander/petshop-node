@@ -38,8 +38,9 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   adicionarTelefone: async function (pessoaId: number, telefone: string) {
     try {
-      console.log({pessoaId, telefone})
+      console.log({ pessoaId, telefone })
       const pessoa: Pessoa = await this.buscarPessoaPorId(pessoaId);
+      console.log(pessoa)
       pessoa.adicionarTelefone(new Telefone(telefone));
       await this.save(pessoa);
     } catch (error) {
@@ -49,8 +50,6 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   removerTelefone: async function (pessoaId: number, telefone: string) {
     try {
-      console.log({pessoaId, telefone})
-
       const pessoa: Pessoa = await this.buscarPessoaPorId(pessoaId);
       pessoa.removerTelefone(new Telefone(telefone));
       await this.save(pessoa);
@@ -61,7 +60,9 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   buscarPessoaPorId: async function (id: number) {
     try {
-      const pessoa = await this.findOne({ where: { id }, relations: ["telefones", "enderecos"] })
+      const pessoa = await this.findOne({
+        where: { id },
+      });
       return pessoa;
     } catch (error) {
       throw error;
@@ -70,7 +71,9 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   buscarPessoaPorEmail: async function (email: string) {
     try {
-      const pessoa = await this.findOne({ where: { email } })
+      const pessoa = await this.findOne({
+        where: { email },
+      });
       return pessoa;
     } catch (error) {
       throw error;
@@ -79,8 +82,8 @@ export const PessoaService = AppDataSource.getRepository(Pessoa).extend({
 
   alterarPessoa: async function (id: number, nome: string, email: string, codNac: string) {
     try {
-      const pessoa = await this.buscarPessoaPorId(id);
-      pessoa(nome, email, codNac);
+      const pessoa: Pessoa = await this.buscarPessoaPorId(id);
+      pessoa.alterarUsuario(nome, email, codNac);
       return await this.save(pessoa);
     } catch (error) {
       throw error;
