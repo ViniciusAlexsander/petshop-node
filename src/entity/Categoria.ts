@@ -6,7 +6,7 @@ export class Categoria extends Base {
 	@Column()
 	nome: string;
 
-	@ManyToMany(() => Produto, (produto) => produto.nome)
+	@ManyToMany(() => Produto, (produto) => produto.categoria)
 	produto: Produto[];
 
 	constructor(nome:string) {
@@ -14,4 +14,8 @@ export class Categoria extends Base {
 		this.nome = nome;
 	}
 
+	adicionarProduto = (produto: Produto): void => {
+		if(!this.produto) this.produto = new Array<Produto>();
+		this.produto.push(produto);
+	}
 }
