@@ -1,6 +1,6 @@
+import { Servico } from "entity/Servico";
 import { AppDataSource } from "../data-source";
 import { PagCartao } from "../entity/PagCartao";
-import { servicoService } from "./servico.service";
 
 export const PagamentoCartaoService = AppDataSource.getRepository(
   PagCartao
@@ -8,12 +8,13 @@ export const PagamentoCartaoService = AppDataSource.getRepository(
   criarPagCartao: async function (
     parcelas: number,
     situacao: string,
-    servicoId: number
+    servico: Servico
   ) {
     try {
-      const servico = await servicoService.buscarServicoId(servicoId);
       const pagCartao = new PagCartao(parcelas, situacao, servico);
-      return await this.save(pagCartao);
+
+      await this.save(pagCartao);
+      return await servico.adicionarPagamento(pagCartao);
     } catch (error) {
       throw error;
     }

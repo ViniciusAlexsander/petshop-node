@@ -22,6 +22,15 @@ servicoRoutes.get(
   }
 );
 
+servicoRoutes.get(
+  "/",
+  async (req: Request, res: Response): Promise<Response> => {
+    const servico = await servicoService.buscarServicos();
+
+    return res.status(200).json(servico);
+  }
+);
+
 servicoRoutes.put("/", async (req: Request, res: Response): Promise<Response> => {
   const { id, dataEntrada,dataSaida, descricao } = req.body;
 

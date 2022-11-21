@@ -1,7 +1,7 @@
 import Base from "./Base";
 import { Produto } from "entity/Produto";
 import { Pet } from "entity/Pet";
-import { Entity, Column, OneToMany, OneToOne } from "typeorm";
+import { Entity, Column, OneToMany, OneToOne, JoinColumn } from "typeorm";
 import { PagCartao } from "./PagCartao";
 import { PagDinheiro } from "./PagDinheiro";
 
@@ -16,14 +16,12 @@ export class Servico extends Base {
   @Column()
   descricao: string;
 
-  @OneToOne(() => PagCartao, (pagamento) => pagamento.servico, {
-    cascade: true,
-  })
+  @OneToOne(() => PagCartao)
+  @JoinColumn({ name: "pagCartaoId" })
   pagCartao: PagCartao;
 
-  @OneToOne(() => PagDinheiro, (pagamento) => pagamento.servico, {
-    cascade: true,
-  })
+  @OneToOne(() => PagDinheiro)
+  @JoinColumn({ name: "pagDinheiroId" })
   pagDinheiro: PagDinheiro;
 
   @OneToMany(() => Produto, (produto) => produto.id)
@@ -38,4 +36,16 @@ export class Servico extends Base {
     this.dataSaida = dataSaida;
     this.descricao = descricao;
   }
+
+  adicionarPagamento = async (
+    pagamento: PagCartao | PagDinheiro
+  ): Promise<void> => {
+    if (pagamento instanceof PagCartao) {
+      this.pagCartao = pagamento;
+    } else {
+      this.pagDinheiro = pagamento;
+    }
+
+    await this.save();
+  };
 }
