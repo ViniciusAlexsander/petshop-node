@@ -13,6 +13,9 @@ import { pessoaEnderecoRoutes } from "controller/pessoaEnderecoController";
 import { relatorioRoutes } from "controller/relatorioController";
 import { servicoRoutes } from "controller/servicoController";
 import { produtoRoutes } from 'controller/produtoController';
+import { funcionarioRoutes } from 'controller/funcionarioController';
+import { categoriaRoutes } from "controller/categoriaController";
+import { clienteRoutes } from "controller/clienteController";
 
 const router = Router();
 
@@ -30,6 +33,10 @@ router.use("/pag-dinheiro", pagDinheiroRoutes);
 router.use("/produto",produtoRoutes)
 router.use("/servico", servicoRoutes);
 router.use("/relatorio", relatorioRoutes);
+router.use("/funcionario",funcionarioRoutes);
+router.use("/categoria",categoriaRoutes);
+router.use("/cliente",clienteRoutes);
+
 
 router.get("/", (req, res) => {
   res.json({ message: "Hello World" });
