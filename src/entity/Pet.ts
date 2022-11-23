@@ -1,4 +1,5 @@
-import { Entity, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Servico } from 'entity/Servico';
+import { Entity, Column, ManyToOne, JoinColumn, ManyToMany, JoinTable } from "typeorm";
 import Base from "./Base";
 import { Especie } from "./Especie";
 import { Raca } from "./Raca";
@@ -15,6 +16,12 @@ export class Pet extends Base {
   @ManyToOne(() => Raca)
   @JoinColumn({ name: "racaId" })
   raca: Raca;
+
+	@ManyToMany(() => Servico, (servico) => servico.pet)
+  @JoinTable({
+    name: "servico_pet",
+  })
+	servico: Servico[];
 
   @Column()
   idade: number;

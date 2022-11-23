@@ -7,12 +7,8 @@ export const RelatorioService = AppDataSource.getRepository(Servico).extend({
     try {
       const servicos = await this.find({
         where: { createAt: Between(dataInicial, dataFinal) },
+				relations:["pet","pagDinheiro","pagCartao"]
       });
-
-      const servico = await this.find({
-        where: { createAt: dataFinal },
-      });
-
       return servicos;
     } catch (error) {
       throw error;

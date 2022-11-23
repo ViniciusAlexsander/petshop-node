@@ -1,7 +1,7 @@
 import Base from "./Base";
 import { Produto } from "entity/Produto";
 import { Pet } from "entity/Pet";
-import { Entity, Column, OneToMany, OneToOne, JoinColumn } from "typeorm";
+import { Entity, Column, OneToMany, OneToOne, JoinColumn, ManyToMany } from "typeorm";
 import { PagCartao } from "./PagCartao";
 import { PagDinheiro } from "./PagDinheiro";
 
@@ -27,8 +27,8 @@ export class Servico extends Base {
   @OneToMany(() => Produto, (produto) => produto.id)
   produto: Produto;
 
-  @OneToMany(() => Pet, (pet) => pet.id)
-  pet: Pet;
+  @ManyToMany(() => Pet, (pet) => pet.servico)
+  pet: Pet[];
 
   constructor(dataEntrada: Date, dataSaida: Date, descricao: string) {
     super();
@@ -48,4 +48,10 @@ export class Servico extends Base {
 
     await this.save();
   };
+
+
+	adicionarPet = ( pet: Pet): void => {
+		if(!this.pet) this.pet = new Array<Pet>();
+		this.pet.push(pet);
+	}
 }

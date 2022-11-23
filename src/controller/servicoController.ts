@@ -4,9 +4,18 @@ import { servicoService } from "service/servico.service";
 export const servicoRoutes = Router();
 
 servicoRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
-  const { dataEntrada,dataSaida, descricao } = req.body;
+  const { dataEntrada,dataSaida, descricao, pet } = req.body;
 
   await servicoService.criarServico(dataEntrada, dataSaida, descricao);
+
+  return res.status(201).send();
+});
+
+
+servicoRoutes.post("/:idServico/:idPet", async (req: Request, res: Response): Promise<Response> => {
+  const { idServico,idPet} = req.params;
+
+  await servicoService.adicionarServicoPet(+idServico,+idPet);
 
   return res.status(201).send();
 });

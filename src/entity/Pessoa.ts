@@ -34,7 +34,7 @@ export class Pessoa extends Base {
     }
 
     removerEndereco = (endereco: Endereco): void => {
-        this.endereco = this.endereco.filter(e => e.logradouro !== endereco.logradouro); 
+        this.endereco = this.endereco.filter(e => e.logradouro !== endereco.logradouro);
     }
 
     adicionarTelefone = (telefone: Telefone): void => {

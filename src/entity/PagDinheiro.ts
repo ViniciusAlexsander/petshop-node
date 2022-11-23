@@ -14,7 +14,7 @@ export class PagDinheiro extends Pagamento {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
   })
-  @JoinColumn()
+  // @JoinColumn()
   servico: Servico;
 
   constructor(

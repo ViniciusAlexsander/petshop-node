@@ -6,6 +6,7 @@ export class Cliente extends Pessoa {
   @Column()
   tipo: string;
 
+
   constructor(nome: string, email: string, codNac: string, tipo: string) {
     super(nome, email, codNac);
     this.tipo = tipo;

@@ -24,19 +24,19 @@ export const ProdutoService = AppDataSource.getRepository(Produto).extend({
 
     alterarProduto: async function (id: number, nome: string, preco:number) {
       try {
-        let produto = await this.buscarProdutoPorId(id);
-
-        produto = {
+				let produto = await this.buscarProdutoPorId(id);
+        return produto = {
           ...produto,
           nome,
           preco
         };
 
-        return await this.save(produto);
       } catch (error) {
         throw error;
       }
     },
+
+
 
     deletarProduto: async function (id: number) {
       try {

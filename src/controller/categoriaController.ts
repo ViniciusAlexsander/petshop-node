@@ -4,9 +4,9 @@ import { CategoriaService } from "service/categoria.service";
 export const categoriaRoutes = Router();
 
 categoriaRoutes.post("/", async (req: Request, res: Response): Promise<Response> => {
-  const { nome, preco } = req.body;
+  const { nome } = req.body;
 
-  await CategoriaService.criarCategoria(nome, preco);
+  await CategoriaService.criarCategoria(nome);
 
   return res.status(201).send();
 });
